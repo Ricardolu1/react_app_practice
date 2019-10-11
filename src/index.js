@@ -4,10 +4,11 @@ import "./index.css"
 import App from "./App"
 import * as serviceWorker from "./serviceWorker"
 import {createStore} from 'redux'
+import { Provider } from "react-redux";
 
 const statechanger = (state,action)=>{
   if (typeof state==='undefined') {
-    return  0
+    return  {n:0}
   }
   switch (action.type) {
     case 'add':
@@ -19,30 +20,27 @@ const statechanger = (state,action)=>{
   }
 }
 
-function add4() {
-  setTimeout(() => {
-    store.dispatch({type:'add',payload:1})
-  }, 2000);
-} 
+
 
 const store= createStore(statechanger)
-function render() {
-  ReactDOM.render(<App value={store.getState()} 
-  onadd1={()=>{store.dispatch({type:'add',payload:1})}} 
-  onadd2={()=>{store.dispatch({type:'add',payload:2})}}
-  onminus1={()=>{store.dispatch({type:'minus',payload:1})}}
-  ifOdd={()=>{
-    if (store.getState()%2===1) {
-      store.dispatch({type:'add',payload:1})
-    }
-  }}
-  onadd4={add4}
-  />,
-  
+
+
+
+// function add4() {
+//   setTimeout(() => {
+//     store.dispatch({type:'add',payload:1})
+//   }, 2000);
+// } 
+
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
   document.getElementById("root"))
-}
-render()
-store.subscribe(render)
+
+// render()
+// store.subscribe(render)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

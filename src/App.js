@@ -7,7 +7,7 @@ class App extends Component{
       <div className="App">
           你点击了 <span id="value">{this.props.n}</span> 次
         <div>
-          <button id="increment" >+1</button>
+          <button id="increment" onClick={()=>this.props.add1()} >+1</button>
           <button id="increment2" >+2</button>
           <button id="incrementIfOdd">如果是单数就加一</button>
           <button id="incrementAsync">两秒钟后加一</button>
@@ -17,22 +17,21 @@ class App extends Component{
   }
 }
 
-function x(state) {
+function getPartialStore(state) {
   return  {
     n:state.n
   }
 }
-function y() {	
-  return{
+//这个y必须是一个对象
+
+const actionCreator = {
     add1:()=>{
       return {type:'add',payload:1}
     }
   }
-}
-connect(x)(App)
 
 
-export default connect(x,y)(App)
+export default connect(getPartialStore,actionCreator)(App)
 
 
    

@@ -8,11 +8,11 @@ import { Provider } from "react-redux";
 
 const statechanger = (state,action)=>{
   if (typeof state==='undefined') {
-    return  {n:0}
+    return  {n:0} //用了react-redux state要写成一个对象
   }
   switch (action.type) {
     case 'add':
-      return state + action.payload
+      return  {n:state.n+action.payload}//  要和上面的state是一样的结构
     case 'minus':
       return state - action.payload
     default:
@@ -32,14 +32,14 @@ const store= createStore(statechanger)
 //   }, 2000);
 // } 
 
-
+//这里provider的意思的是，你把store传给我，我会把store传给这个provider里面包含的每一个组件
   ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={store}>   
       <App />
     </Provider>,
   document.getElementById("root"))
 
-// render()
+// render() 
 // store.subscribe(render)
 
 // If you want your app to work offline and load faster, you can change

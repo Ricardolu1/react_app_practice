@@ -17,21 +17,21 @@ class App extends Component{
   }
 }
 
-function getPartialStore(state) {
+function mapStateToProps(state) {
   return  {
     n:state.n
   }
 }
 //这个y必须是一个对象
 
-const actionCreator = {
-    add1:()=>{
-      return {type:'add',payload:1}
-    }
+function mapDispatchToprops(dispatch) {
+  return{
+    add1:()=>dispatch({type:'add',payload:1})
   }
+}
 
 
-export default connect(getPartialStore,actionCreator)(App)
+export default connect(mapStateToProps,mapDispatchToprops)(App)
 
 
    

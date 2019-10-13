@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker"
 import {createStore} from 'redux'
 import { Provider } from "react-redux";
 
-const statechanger = (state,action)=>{
+const reducer = (state,action)=>{
   if (typeof state==='undefined') {
     return  {n:0} //用了react-redux state要写成一个对象
   }
@@ -22,7 +22,7 @@ const statechanger = (state,action)=>{
 
 
 
-const store= createStore(statechanger)
+const store= createStore(reducer)
 
 
 
